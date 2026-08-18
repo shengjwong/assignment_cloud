@@ -7,7 +7,7 @@ variable "aws_region" {
 variable "name_prefix" {
   description = "Prefix applied to every resource name, per the assignment-{resource} convention."
   type        = string
-  default     = "assignment"
+  default     = "assignment_vendor"
 }
 
 variable "vpc_cidr" {
@@ -47,7 +47,7 @@ variable "instance_profile_name" {
 
 variable "db_name" {
   type    = string
-  default = "event_ticketing_db"
+  default = "vendor_db"
 }
 
 variable "db_username" {
