@@ -5,14 +5,14 @@ variable "aws_region" {
 }
 
 variable "name_prefix" {
-  description = "Prefix applied to every resource name, per the assignment-{resource} convention."
+  description = "Prefix applied to every resource name."
   type        = string
-  default     = "assignment_vendor"
+  default     = "vendor-booking-app" # Fixed: Hyphen instead of underscore
 }
 
 variable "vpc_cidr" {
-  type    = string
-  default = "10.0.0.0/16"
+  type        = string
+  default     = "10.0.0.0/16"
 }
 
 variable "azs" {
@@ -22,72 +22,70 @@ variable "azs" {
 }
 
 variable "public_subnet_cidrs" {
-  type    = list(string)
-  default = ["10.0.0.0/24", "10.0.1.0/24"]
+  type        = list(string)
+  default     = ["10.0.1.0/24", "10.0.2.0/24"]
 }
 
 variable "private_subnet_cidrs" {
-  type    = list(string)
-  default = ["10.0.10.0/24", "10.0.11.0/24"]
+  type        = list(string)
+  default     = ["10.0.11.0/24", "10.0.12.0/24"]
 }
 
 variable "instance_type" {
-  description = "EC2 instance type for app servers. Bump this later if t3.micro is insufficient - no other changes needed."
+  description = "EC2 instance type for app servers."
   type        = string
   default     = "t3.micro"
 }
 
 variable "instance_profile_name" {
-  description = "Existing AWS Academy IAM instance profile (cannot create a new one in a Learner Lab account)."
+  description = "Existing AWS Academy IAM instance profile."
   type        = string
   default     = "LabInstanceProfile"
 }
 
-
-
 variable "db_name" {
-  type    = string
-  default = "vendor_db"
+  type        = string
+  default     = "vendor_db"
 }
 
 variable "db_username" {
-  type    = string
-  default = "admin"
+  type        = string
+  default     = "vendor_admin"
 }
 
 variable "secret_name" {
-  type    = string
-  default = "assignment-db-credentials"
+  type        = string
+  default     = "vendor-db-credentials"
 }
 
 variable "s3_bucket_name" {
   description = "Globally-unique bucket name for event image uploads."
   type        = string
-  default     = "assignment-s3-uploads"
+  default     = "vendor-app-assets-2026-group3"
 }
 
 variable "artifact_key" {
-  description = "S3 object key (within s3_bucket_name) that deploy.yml uploads the app release artifact to."
+  description = "S3 object key that deploy.yml uploads the app release artifact to."
   type        = string
-  default     = "artifacts/assignment-app.zip"
+  default     = "artifacts/vendor-app.zip"
 }
 
 variable "health_check_path" {
-  type    = string
-  default = "/healthz.php"
+  type        = string
+  default     = "/healthz.php"
 }
 
 variable "asg_min_size" {
-  type    = number
-  default = 2
+  type        = number
+  default     = 2
 }
 
 variable "asg_max_size" {
-  type    = number
-  default = 4
+  type        = number
+  default     = 4
 }
 
 variable "asg_desired_capacity" {
-  type    = number
-  default = 2
+  type        = number
+  default     = 2
 }
