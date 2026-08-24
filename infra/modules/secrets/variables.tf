@@ -1,15 +1,14 @@
 variable "name_prefix" {
   description = "Prefix applied to all resource names in this module."
   type        = string
-  default     = "assignment"
+  default     = "vendor-booking-app"
 }
 
 variable "secret_name" {
   description = "Name of the Secrets Manager secret holding DB connection details."
   type        = string
-  default     = "assignment-db-credentials"
+  default     = "vendor-db-credentials"
 }
-
 
 variable "db_host" {
   description = "RDS endpoint address."

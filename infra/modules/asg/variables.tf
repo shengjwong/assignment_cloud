@@ -1,7 +1,7 @@
 variable "name_prefix" {
   description = "Prefix applied to all resource names in this module."
   type        = string
-  default     = "assignment"
+  default     = "vendor-booking-app"
 }
 
 variable "vpc_id" {
@@ -49,7 +49,7 @@ variable "artifact_bucket" {
 variable "artifact_key" {
   description = "S3 object key of the latest application release artifact, pulled by user-data on every boot."
   type        = string
-  default     = "artifacts/assignment-app.zip"
+  default     = "artifacts/vendor-app.zip"
 }
 
 variable "aws_region" {
@@ -59,18 +59,18 @@ variable "aws_region" {
 }
 
 variable "min_size" {
-  type    = number
-  default = 2
+  type        = number
+  default     = 2
 }
 
 variable "max_size" {
-  type    = number
-  default = 4
+  type        = number
+  default     = 4
 }
 
 variable "desired_capacity" {
-  type    = number
-  default = 2
+  type        = number
+  default     = 2
 }
 
 variable "cpu_target_value" {

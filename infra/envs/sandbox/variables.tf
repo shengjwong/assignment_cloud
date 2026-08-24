@@ -7,7 +7,7 @@ variable "aws_region" {
 variable "name_prefix" {
   description = "Prefix applied to every resource name."
   type        = string
-  default     = "vendor-booking-app" # Fixed: Hyphen instead of underscore
+  default     = "vendor-booking-app" 
 }
 
 variable "vpc_cidr" {

@@ -1,7 +1,7 @@
 variable "name_prefix" {
   description = "Prefix applied to all resource names in this module."
   type        = string
-  default     = "assignment"
+  default     = "vendor-booking-app"
 }
 
 variable "private_subnet_ids" {
@@ -17,13 +17,13 @@ variable "rds_sg_id" {
 variable "db_name" {
   description = "Initial database name."
   type        = string
-  default     = "event_ticketing_db"
+  default     = "vendor_db"
 }
 
 variable "db_username" {
   description = "Master username."
   type        = string
-  default     = "admin"
+  default     = "vendor_admin"
 }
 
 variable "db_password" {
