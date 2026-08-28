@@ -22,7 +22,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  APP_DIR: event-ticketing
+  APP_DIR: vendor-services-booking
   ARTIFACT_PREFIX: artifacts
   APP_TAG: assignment-event-ticketing
 
