@@ -58,15 +58,6 @@ jobs:
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Setup PHP + Composer
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: "8.2"
-
-      - name: Install app dependencies (AWS SDK for PHP)
-        working-directory: ${{ env.APP_DIR }}
-        run: composer install --no-dev --optimize-autoloader
-
       - name: Package application
         working-directory: ${{ env.APP_DIR }}
         run: zip -r ../assignment-app.zip . -x "uploads/*"
