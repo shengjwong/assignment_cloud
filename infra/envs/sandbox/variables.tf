@@ -7,12 +7,12 @@ variable "aws_region" {
 variable "name_prefix" {
   description = "Prefix applied to every resource name."
   type        = string
-  default     = "vendor-booking-app" 
+  default     = "vendor-booking-app"
 }
 
 variable "vpc_cidr" {
-  type        = string
-  default     = "10.0.0.0/16"
+  type    = string
+  default = "10.0.0.0/16"
 }
 
 variable "azs" {
@@ -22,13 +22,13 @@ variable "azs" {
 }
 
 variable "public_subnet_cidrs" {
-  type        = list(string)
-  default     = ["10.0.1.0/24", "10.0.2.0/24"]
+  type    = list(string)
+  default = ["10.0.1.0/24", "10.0.2.0/24"]
 }
 
 variable "private_subnet_cidrs" {
-  type        = list(string)
-  default     = ["10.0.11.0/24", "10.0.12.0/24"]
+  type    = list(string)
+  default = ["10.0.11.0/24", "10.0.12.0/24"]
 }
 
 variable "instance_type" {
@@ -44,18 +44,18 @@ variable "instance_profile_name" {
 }
 
 variable "db_name" {
-  type        = string
-  default     = "vendor_db"
+  type    = string
+  default = "vendor_db"
 }
 
 variable "db_username" {
-  type        = string
-  default     = "vendor_admin"
+  type    = string
+  default = "vendor_admin"
 }
 
 variable "secret_name" {
-  type        = string
-  default     = "vendor-db-credentials"
+  type    = string
+  default = "vendor-db-credentials"
 }
 
 variable "s3_bucket_name" {
@@ -71,21 +71,21 @@ variable "artifact_key" {
 }
 
 variable "health_check_path" {
-  type        = string
-  default     = "/healthz.php"
+  type    = string
+  default = "/healthz.php"
 }
 
 variable "asg_min_size" {
-  type        = number
-  default     = 2
+  type    = number
+  default = 2
 }
 
 variable "asg_max_size" {
-  type        = number
-  default     = 4
+  type    = number
+  default = 4
 }
 
 variable "asg_desired_capacity" {
-  type        = number
-  default     = 2
+  type    = number
+  default = 2
 }
