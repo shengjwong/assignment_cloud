@@ -24,7 +24,7 @@ env:
   AWS_REGION: us-east-1
   APP_DIR: vendor-services-booking
   ARTIFACT_PREFIX: artifacts
-  APP_TAG: assignment-vendor-asg-instance
+  APP_TAG: assignment-vendor-vendor-booking
 
 jobs:
   infra:

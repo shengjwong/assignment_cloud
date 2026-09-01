@@ -7,7 +7,7 @@ on:
   workflow_dispatch: {}
 env:
   AWS_REGION: us-east-1
-  APP_TAG: assignment-vendor-asg-instance
+  APP_TAG: assignment-vendor-vendor-booking
   SCHEMA_KEY: db-init/schema.sql
   SCRIPT_KEY: db-init/seed-db.sh
 jobs:
