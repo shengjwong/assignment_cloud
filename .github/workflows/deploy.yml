@@ -109,7 +109,7 @@ jobs:
               \"cloud-init status --wait\",
               \"aws s3 cp s3://${{ env.ARTIFACT_BUCKET }}/${{ env.ARTIFACT_PREFIX }}/assignment-app.zip /tmp/assignment-app.zip\",
               \"sudo unzip -o /tmp/assignment-app.zip -d /var/www/html\",
-              \"SECRET_JSON=\$(aws secretsmanager get-secret-value --secret-id assignment-vendor-db-credentials --region us-east-1 --query SecretString --output text 2>/dev/null || aws secretsmanager get-secret-value --secret-id assignment-db-credentials --region us-east-1 --query SecretString --output text)\",
+              \"SECRET_JSON=\$(aws secretsmanager get-secret-value --secret-id vendor-db-credentials --region us-east-1 --query SecretString --output text)\",
               \"DB_HOST=\$(echo \$SECRET_JSON | jq -r .host)\",
               \"DB_USER=\$(echo \$SECRET_JSON | jq -r .username)\",
               \"DB_PASS=\$(echo \$SECRET_JSON | jq -r .password)\",
