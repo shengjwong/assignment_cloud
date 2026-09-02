@@ -1,27 +1,27 @@
 #!/bin/bash
 set -euxo pipefail
 
-dnf update -y
-
-# Ensure SSM agent is installed and running
+# 1. Ensure SSM Agent is active and connected
 dnf install -y amazon-ssm-agent
 systemctl enable amazon-ssm-agent
-systemctl start amazon-ssm-agent
+systemctl restart amazon-ssm-agent
 
+# 2. Install base packages
+dnf update -y
 dnf install -y httpd php php-mysqlnd php-cli jq unzip mariadb105
 
-# Pull DB connection details from Secrets Manager
+# 3. Pull DB connection details safely (fallback to empty strings if not yet created)
 SECRET_JSON=$(aws secretsmanager get-secret-value \
   --secret-id "${secret_arn}" \
   --region "${aws_region}" \
-  --query SecretString --output text)
+  --query SecretString --output text 2>/dev/null || echo "{}")
 
-DB_HOST=$(echo "$SECRET_JSON" | jq -r .host)
-DB_USER=$(echo "$SECRET_JSON" | jq -r .username)
-DB_PASS=$(echo "$SECRET_JSON" | jq -r .password)
-DB_NAME=$(echo "$SECRET_JSON" | jq -r .dbname)
+DB_HOST=$(echo "$SECRET_JSON" | jq -r '.host // ""')
+DB_USER=$(echo "$SECRET_JSON" | jq -r '.username // ""')
+DB_PASS=$(echo "$SECRET_JSON" | jq -r '.password // ""')
+DB_NAME=$(echo "$SECRET_JSON" | jq -r '.dbname // ""')
 
-# 1. Set Apache Environment Variables (supports both DB_PASS and DB_PASSWORD)
+# 4. Set Apache Environment Variables
 cat <<EOF > /etc/httpd/conf.d/assignment-env.conf
 SetEnv DB_HOST "$DB_HOST"
 SetEnv DB_USER "$DB_USER"
@@ -34,7 +34,19 @@ EOF
 
 mkdir -p /var/www/html
 
-# 2. Generate root .env file for PHP applications reading .env directly
+# 5. Fetch artifact from S3 or set up initial bootstrap page
+if aws s3api head-object --bucket "${artifact_bucket}" --key "${artifact_key}" --region "${aws_region}" >/dev/null 2>&1; then
+  aws s3 cp "s3://${artifact_bucket}/${artifact_key}" /tmp/assignment-app.zip --region "${aws_region}"
+  rm -rf /var/www/html/*
+  unzip -o /tmp/assignment-app.zip -d /var/www/html
+else
+  echo "<?php http_response_code(200); echo 'assignment-vendor-booking: bootstrapped, waiting for first deploy.';" \
+    > /var/www/html/index.php
+  echo "<?php http_response_code(200); header('Content-Type: text/plain'); echo 'ok';" \
+    > /var/www/html/healthz.php
+fi
+
+# 6. Generate .env configuration file
 cat <<EOF > /var/www/html/.env
 DB_HOST=$DB_HOST
 DB_USER=$DB_USER
@@ -44,30 +56,10 @@ DB_NAME=$DB_NAME
 AWS_REGION=${aws_region}
 EOF
 
-# Fetch artifact from S3 if available
-if aws s3api head-object --bucket "${artifact_bucket}" --key "${artifact_key}" --region "${aws_region}" >/dev/null 2>&1; then
-  aws s3 cp "s3://${artifact_bucket}/${artifact_key}" /tmp/assignment-app.zip --region "${aws_region}"
-  rm -rf /var/www/html/*
-  unzip -o /tmp/assignment-app.zip -d /var/www/html
-  # Re-apply .env if zip file overwrote directory
-  cat <<EOF > /var/www/html/.env
-DB_HOST=$DB_HOST
-DB_USER=$DB_USER
-DB_PASS=$DB_PASS
-DB_PASSWORD=$DB_PASS
-DB_NAME=$DB_NAME
-AWS_REGION=${aws_region}
-EOF
-else
-  echo "<?php http_response_code(200); echo 'assignment-event-ticketing: bootstrapped, waiting for first deploy.';" \
-    > /var/www/html/index.php
-  echo "<?php http_response_code(200); header('Content-Type: text/plain'); echo 'ok';" \
-    > /var/www/html/healthz.php
-fi
-
-# Ensure apache user owns all files including .env
+# 7. Set permissions and start Web Server
 chown -R apache:apache /var/www/html
-chmod 640 /var/www/html/.env 2>/dev/null || true
+chmod 640 /var/www/html/.env
+chmod -R 755 /var/www/html
 
 systemctl enable httpd
 systemctl restart httpd
