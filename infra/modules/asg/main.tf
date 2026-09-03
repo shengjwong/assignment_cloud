@@ -43,7 +43,7 @@ resource "aws_launch_template" "app" {
     resource_type = "instance"
     tags = {
       Name = "${var.name_prefix}-ec2"
-      App  = "${var.name_prefix}-event-ticketing"
+      App  = "${var.name_prefix}-services-booking"
     }
   }
 
