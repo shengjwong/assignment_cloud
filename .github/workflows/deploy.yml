@@ -125,13 +125,21 @@ jobs:
             --document-name "AWS-RunShellScript" \
             --targets "Key=tag:App,Values=${{ env.APP_TAG }}" \
             --comment "${{ env.APP_TAG }} deploy" \
-            --parameters '{"commands":[
-              "cloud-init status --wait",
-              "aws s3 cp s3://${{ env.ARTIFACT_BUCKET }}/${{ env.ARTIFACT_PREFIX }}/assignment-app.zip /tmp/assignment-app.zip",
-              "sudo rm -rf /var/www/html/*",
-              "sudo unzip -o /tmp/assignment-app.zip -d /var/www/html",
-              "sudo systemctl restart httpd"
-            ]}' \
+            --parameters "commands=[
+              \"cloud-init status --wait\",
+              \"aws s3 cp s3://${{ env.ARTIFACT_BUCKET }}/${{ env.ARTIFACT_PREFIX }}/assignment-app.zip /tmp/assignment-app.zip\",
+              \"sudo unzip -o /tmp/assignment-app.zip -d /var/www/html\",
+              \"SECRET_JSON=\$(aws secretsmanager get-secret-value --secret-id vendor-db-credentials --region us-east-1 --query SecretString --output text)\",
+              \"DB_HOST=\$(echo \$SECRET_JSON | jq -r .host)\",
+              \"DB_USER=\$(echo \$SECRET_JSON | jq -r .username)\",
+              \"DB_PASS=\$(echo \$SECRET_JSON | jq -r .password)\",
+              \"DB_NAME=\$(echo \$SECRET_JSON | jq -r .dbname)\",
+              \"echo -e \\\"DB_HOST=\$DB_HOST\\nDB_USER=\$DB_USER\\nDB_PASS=\$DB_PASS\\nDB_NAME=\$DB_NAME\\\" | sudo tee /var/www/html/.env > /dev/null\",
+              \"sudo chown -R apache:apache /var/www/html\",
+              \"sudo chmod 640 /var/www/html/.env\",
+              \"sudo chmod -R 755 /var/www/html\",
+              \"sudo systemctl restart httpd\"
+            ]" \
             --query "Command.CommandId" --output text)
 
           for id in $INSTANCE_IDS; do
