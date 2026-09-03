@@ -1,13 +1,13 @@
 variable "name_prefix" {
   description = "Prefix applied to all resource names in this module."
   type        = string
-  default     = "vendor-booking-app"
+  default     = "assignment"
 }
 
 variable "bucket_name" {
-  description = "Globally-unique S3 bucket name for uploaded vendor images."
+  description = "Globally-unique S3 bucket name for uploaded event images."
   type        = string
-  default     = "vendor-app-assets-2026-group3"
+  default     = "assignment-s3-uploads"
 }
 
 variable "public_read_prefix" {

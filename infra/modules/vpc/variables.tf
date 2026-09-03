@@ -1,7 +1,7 @@
 variable "name_prefix" {
   description = "Prefix applied to all resource names in this module."
   type        = string
-  default     = "vendor-booking-app"
+  default     = "assignment"
 }
 
 variable "vpc_cidr" {

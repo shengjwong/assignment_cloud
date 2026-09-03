@@ -1,32 +1,25 @@
 #!/bin/bash
 set -euxo pipefail
 
-# 1. Ensure SSM Agent is active and connected
-dnf install -y amazon-ssm-agent
-systemctl enable amazon-ssm-agent
-systemctl restart amazon-ssm-agent
-
-# 2. Install base packages
 dnf update -y
 dnf install -y httpd php php-mysqlnd php-cli jq unzip mariadb105
 
-# 3. Pull DB connection details safely (fallback to empty strings if not yet created)
+# Pull DB connection details from Secrets Manager (assignment-db-credentials)
+# using this instance's IAM role - no credentials are ever hardcoded here.
 SECRET_JSON=$(aws secretsmanager get-secret-value \
   --secret-id "${secret_arn}" \
   --region "${aws_region}" \
-  --query SecretString --output text 2>/dev/null || echo "{}")
+  --query SecretString --output text)
 
-DB_HOST=$(echo "$SECRET_JSON" | jq -r '.host // ""')
-DB_USER=$(echo "$SECRET_JSON" | jq -r '.username // ""')
-DB_PASS=$(echo "$SECRET_JSON" | jq -r '.password // ""')
-DB_NAME=$(echo "$SECRET_JSON" | jq -r '.dbname // ""')
+DB_HOST=$(echo "$SECRET_JSON" | jq -r .host)
+DB_USER=$(echo "$SECRET_JSON" | jq -r .username)
+DB_PASS=$(echo "$SECRET_JSON" | jq -r .password)
+DB_NAME=$(echo "$SECRET_JSON" | jq -r .dbname)
 
-# 4. Set Apache Environment Variables
 cat <<EOF > /etc/httpd/conf.d/assignment-env.conf
 SetEnv DB_HOST "$DB_HOST"
 SetEnv DB_USER "$DB_USER"
 SetEnv DB_PASS "$DB_PASS"
-SetEnv DB_PASSWORD "$DB_PASS"
 SetEnv DB_NAME "$DB_NAME"
 SetEnv S3_BUCKET "${artifact_bucket}"
 SetEnv AWS_REGION "${aws_region}"
@@ -34,32 +27,23 @@ EOF
 
 mkdir -p /var/www/html
 
-# 5. Fetch artifact from S3 or set up initial bootstrap page
+# Self-healing deploy: every new/replaced instance (scale-out, instance
+# refresh, terraform apply after a destroy, etc.) pulls whatever was last
+# shipped by the deploy.yml workflow, so the fleet never drifts back to the
+# placeholder page after the first real deploy. Falls back to a placeholder
+# only before any deploy has ever run.
 if aws s3api head-object --bucket "${artifact_bucket}" --key "${artifact_key}" --region "${aws_region}" >/dev/null 2>&1; then
   aws s3 cp "s3://${artifact_bucket}/${artifact_key}" /tmp/assignment-app.zip --region "${aws_region}"
   rm -rf /var/www/html/*
   unzip -o /tmp/assignment-app.zip -d /var/www/html
 else
-  echo "<?php http_response_code(200); echo 'assignment-vendor-booking: bootstrapped, waiting for first deploy.';" \
+  echo "<?php http_response_code(200); echo 'assignment-event-ticketing: bootstrapped, waiting for first deploy.';" \
     > /var/www/html/index.php
+  # Matches healthz.php's contract (no DB dependency) so the ALB target group
+  # already sees this instance as healthy before the first real deploy.
   echo "<?php http_response_code(200); header('Content-Type: text/plain'); echo 'ok';" \
     > /var/www/html/healthz.php
 fi
-
-# 6. Generate .env configuration file
-cat <<EOF > /var/www/html/.env
-DB_HOST=$DB_HOST
-DB_USER=$DB_USER
-DB_PASS=$DB_PASS
-DB_PASSWORD=$DB_PASS
-DB_NAME=$DB_NAME
-AWS_REGION=${aws_region}
-EOF
-
-# 7. Set permissions and start Web Server
-chown -R apache:apache /var/www/html
-chmod 640 /var/www/html/.env
-chmod -R 755 /var/www/html
 
 systemctl enable httpd
 systemctl restart httpd

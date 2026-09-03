@@ -13,6 +13,8 @@ data "aws_ami" "amazon_linux" {
   }
 }
 
+# Referenced, never created - Academy Learner Lab accounts block new IAM
+# roles/instance profiles, so app instances reuse the pre-provisioned LabRole.
 data "aws_iam_instance_profile" "lab" {
   name = var.instance_profile_name
 }
@@ -28,6 +30,8 @@ resource "aws_launch_template" "app" {
     name = data.aws_iam_instance_profile.lab.name
   }
 
+  # Bootstraps Apache/PHP and the DB env vars from Secrets Manager. The actual
+  # application code is deployed afterwards by the CD workflow via SSM.
   user_data = base64encode(templatefile("${path.module}/templates/user_data.sh.tftpl", {
     secret_arn      = var.secret_arn
     aws_region      = var.aws_region
@@ -39,7 +43,7 @@ resource "aws_launch_template" "app" {
     resource_type = "instance"
     tags = {
       Name = "${var.name_prefix}-ec2"
-      App  = "${var.name_prefix}-vendor-booking" # 改掉 event-ticketing
+      App  = "${var.name_prefix}-event-ticketing"
     }
   }
 
@@ -51,11 +55,15 @@ resource "aws_launch_template" "app" {
 resource "aws_autoscaling_group" "app" {
   name = "${var.name_prefix}-asg"
 
-  vpc_zone_identifier       = var.private_subnet_ids
-  min_size                  = var.min_size
-  max_size                  = var.max_size
-  desired_capacity          = var.desired_capacity
-  health_check_type         = "ELB"
+  vpc_zone_identifier = var.private_subnet_ids
+  min_size            = var.min_size
+  max_size            = var.max_size
+  desired_capacity    = var.desired_capacity
+  health_check_type   = "ELB"
+  # Generous grace period: on a t3.micro, user-data runs dnf update + installs
+  # httpd/php/mariadb and pulls the app artifact from S3 before Apache serves
+  # healthz.php - a shorter window risks the ASG killing the instance mid-boot
+  # and looping. 300s comfortably covers a cold boot.
   health_check_grace_period = 300
   target_group_arns         = [var.target_group_arn]
 
@@ -77,9 +85,10 @@ resource "aws_autoscaling_group" "app" {
     propagate_at_launch = true
   }
 
+  # Used by the CD workflow to target instances via SSM Run Command.
   tag {
     key                 = "App"
-    value               = "${var.name_prefix}-vendor-booking" # 改掉 event-ticketing
+    value               = "${var.name_prefix}-event-ticketing"
     propagate_at_launch = true
   }
 }
