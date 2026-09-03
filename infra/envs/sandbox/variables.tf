@@ -47,7 +47,7 @@ variable "instance_profile_name" {
 
 variable "db_name" {
   type    = string
-  default = "event_ticketing_db"
+  default = "vendor_services_db"
 }
 
 variable "db_username" {

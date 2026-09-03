@@ -35,6 +35,10 @@ resource "aws_db_instance" "this" {
   deletion_protection     = false
   apply_immediately       = true
 
+  lifecycle {
+    ignore_changes = [db_name]
+  }
+
   tags = {
     Name = "${var.name_prefix}-rds"
   }

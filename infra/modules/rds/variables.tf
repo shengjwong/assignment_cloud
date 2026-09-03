@@ -17,7 +17,7 @@ variable "rds_sg_id" {
 variable "db_name" {
   description = "Initial database name."
   type        = string
-  default     = "event_ticketing_db"
+  default     = "vendor_services_db"
 }
 
 variable "db_username" {
