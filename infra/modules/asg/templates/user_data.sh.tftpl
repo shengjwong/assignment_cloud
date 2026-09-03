@@ -46,7 +46,7 @@ if aws s3api head-object \
 
 else
 
-  echo "<?php http_response_code(200); echo 'assignment-event-ticketing: bootstrapped, waiting for first deploy.';" \
+  echo "<?php http_response_code(200); echo 'assignment-vendor-services-booking: bootstrapped, waiting for first deploy.';" \
     > /var/www/html/index.php
 
   # Health check endpoint must not depend on the database.
