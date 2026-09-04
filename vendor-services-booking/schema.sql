@@ -16,7 +16,7 @@ CREATE TABLE users (
 -- Seed admin account: admin@example.com / admin123
 -- Change this password immediately in any real deployment.
 INSERT INTO users (name, email, password_hash, is_admin) VALUES
-('Admin', 'admin@example.com', '$2y$10$HI3gLmyD4OGmfNLAGUIL8.eBhhKu5nzL7wTDws.6mUNO9V44kyM5q', 1);
+('Admin', 'admin@gugugaga.com', '$2y$10$HI3gLmyD4OGmfNLAGUIL8.eBhhKu5nzL7wTDws.6mUNO9V44kyM5q', 1);
 
 CREATE TABLE vendors (
   id INT AUTO_INCREMENT PRIMARY KEY,
