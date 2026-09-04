@@ -1,25 +1,25 @@
 :root {
   color-scheme: light;
 
-  --accent: #7c3aed;
-  --accent-dark: #5b21b6;
-  --accent-soft: #f3e8ff;
-  --bg: #f6f3ff;
+  --accent: #0ea5e9;
+  --accent-dark: #0284c7;
+  --accent-soft: #e0f2fe;
+  --bg: #f8fafc;
   --surface: #ffffff;
-  --surface-alt: #faf7ff;
-  --text: #1f1633;
-  --text-muted: #685d7e;
-  --border: #e8ddff;
+  --surface-alt: #f1f5f9;
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
   --danger: #ef4444;
   --danger-dark: #dc2626;
   --danger-soft: #fef2f2;
   --success: #10b981;
   --success-soft: #ecfdf5;
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --shadow-sm: 0 8px 20px rgba(124, 58, 237, 0.10);
-  --shadow-md: 0 22px 48px rgba(76, 29, 149, 0.16);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 16px 32px rgba(15, 23, 42, 0.08);
 }
 
 /* System preference (used when the user hasn't picked a theme manually) */
@@ -27,23 +27,23 @@
   :root:not([data-theme="light"]) {
     color-scheme: dark;
 
-    --accent: #a78bfa;
-    --accent-dark: #8b5cf6;
-    --accent-soft: #1d1532;
-    --bg: #0d0b16;
-    --surface: #171327;
-    --surface-alt: #1d1833;
-    --text: #f1eaff;
-    --text-muted: #b7a9d9;
-    --border: #342a52;
+    --accent: #38bdf8;
+    --accent-dark: #0284c7;
+    --accent-soft: #0c2a40;
+    --bg: #0b0f19;
+    --surface: #111827;
+    --surface-alt: #1f2937;
+    --text: #f3f4f6;
+    --text-muted: #9ca3af;
+    --border: #1f2937;
     --danger: #f87171;
     --danger-dark: #ef4444;
     --danger-soft: #2a1d1d;
     --success: #34d399;
     --success-soft: #122a21;
 
-    --shadow-sm: 0 8px 18px rgba(2, 6, 23, 0.5);
-    --shadow-md: 0 24px 40px rgba(2, 6, 23, 0.6);
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 16px 32px rgba(0, 0, 0, 0.5);
   }
 }
 
@@ -51,23 +51,23 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  --accent: #a78bfa;
-  --accent-dark: #8b5cf6;
-  --accent-soft: #1d1532;
-  --bg: #0d0b16;
-  --surface: #171327;
-  --surface-alt: #1d1833;
-  --text: #f1eaff;
-  --text-muted: #b7a9d9;
-  --border: #342a52;
+  --accent: #38bdf8;
+  --accent-dark: #0284c7;
+  --accent-soft: #0c2a40;
+  --bg: #0b0f19;
+  --surface: #111827;
+  --surface-alt: #1f2937;
+  --text: #f3f4f6;
+  --text-muted: #9ca3af;
+  --border: #1f2937;
   --danger: #f87171;
   --danger-dark: #ef4444;
   --danger-soft: #2a1d1d;
   --success: #34d399;
   --success-soft: #122a21;
 
-  --shadow-sm: 0 8px 18px rgba(2, 6, 23, 0.5);
-  --shadow-md: 0 24px 40px rgba(2, 6, 23, 0.6);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 16px 32px rgba(0, 0, 0, 0.5);
 }
 
 * { box-sizing: border-box; }
@@ -85,7 +85,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  background: linear-gradient(135deg, var(--accent-dark), #0f172a);
   color: #fff;
   padding: 16px 32px;
   flex-wrap: wrap;
@@ -257,7 +257,7 @@ body {
   text-align: center;
   padding: 56px 24px;
   margin-bottom: 40px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  background: linear-gradient(135deg, var(--accent-dark), #0f172a);
   color: #fff;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
@@ -422,7 +422,7 @@ input:focus, select:focus, textarea:focus {
   justify-content: center;
   gap: 6px;
   padding: 11px 22px;
-  background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 45%, #4c1d95 100%);
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
   color: #fff;
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: 999px;
@@ -432,15 +432,15 @@ input:focus, select:focus, textarea:focus {
   font-weight: 700;
   font-family: inherit;
   letter-spacing: 0.02em;
-  box-shadow: 0 12px 24px rgba(109, 40, 217, 0.28);
+  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.25);
   transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
 }
 
 .btn:hover, button:hover {
-  background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 40%, #6d28d9 100%);
+  background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
   color: #fff;
   transform: translateY(-1px);
-  box-shadow: 0 16px 30px rgba(109, 40, 217, 0.34);
+  box-shadow: 0 12px 24px rgba(14, 165, 233, 0.35);
   filter: brightness(1.05);
 }
 

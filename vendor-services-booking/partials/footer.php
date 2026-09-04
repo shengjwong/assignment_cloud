@@ -2,8 +2,8 @@
 <footer class="site-footer">
 <div class="footer-grid">
 <div class="footer-brand">
-<div class="footer-brand-name">On-Campus Vendor Services</div>
-<p>Book a time slot with printing, laundry, tailoring and repair vendors on campus.</p>
+<div class="footer-brand-name">GUGUGAGA Services</div>
+<p>Book a service slot with top printing, laundry, tailoring, and tech repair vendors seamlessly.</p>
 </div>
 <div class="footer-links">
 <h4>Explore</h4>
@@ -19,12 +19,12 @@
 </div>
 <div class="footer-links">
 <h4>Contact</h4>
-<p>Student Centre Management Office<br>Ground Floor</p>
-<p>+60 3-4145 0450</p>
+<p>GUGUGAGA HQ<br>Kuala Lumpur, Malaysia</p>
+<p>+60 3-1234 5678</p>
 </div>
 </div>
 <div class="footer-bottom">
-<p>&copy; <?= date('Y') ?> On-Campus Vendor Services &middot; AMIT3253 Sample Project</p>
+<p>&copy; <?= date('Y') ?> GUGUGAGA &middot; AMIT3253 Assignment Project</p>
 </div>
 </footer>
 <div id="lightbox" class="lightbox-overlay">

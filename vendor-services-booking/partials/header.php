@@ -18,14 +18,14 @@ function nav_active($page, $current) {
 })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="<?= htmlspecialchars($pageDescription ?? 'Book a service slot with on-campus vendors - printing, laundry, tailoring and more.') ?>">
-<title><?= htmlspecialchars($pageTitle ?? 'On-Campus Vendor Services') ?></title>
-<link rel="icon" type="image/png" href="assets/favicon.png">
+<meta name="description" content="<?= htmlspecialchars($pageDescription ?? 'Book a service slot with GUGUGAGA vendors - printing, laundry, tailoring, tech repair and more.') ?>">
+<title><?= htmlspecialchars($pageTitle ?? 'GUGUGAGA - Vendor Services') ?></title>
+<link rel="icon" type="image/png" href="assets/gugugaga.png">
 <link rel="stylesheet" href="style.css?v=<?= @filemtime(__DIR__ . '/../style.css') ?>">
 </head>
 <body>
 <nav class="navbar">
-<a class="brand" href="index.php"><img src="assets/tarumt-logo.png" alt="TAR UMT" class="brand-logo">On-Campus Vendor Services</a>
+<a class="brand" href="index.php"><img src="assets/booking.png" alt="GUGUGAGA Logo" class="brand-logo">GUGUGAGA Services</a>
 <div class="nav-links">
 <a href="index.php" class="<?= trim(nav_active('index.php', $currentPage)) ?>">Home</a>
 <a href="vendors.php" class="<?= trim(nav_active('vendors.php', $currentPage)) ?>">Vendors</a>

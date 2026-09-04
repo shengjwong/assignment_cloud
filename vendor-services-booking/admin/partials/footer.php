@@ -1,6 +1,6 @@
 </main>
 <footer class="footer">
-<p>&copy; <?= date('Y') ?> On-Campus Vendor Services &middot; Admin Panel</p>
+<p>&copy; <?= date('Y') ?> GUGUGAGA Vendor Services &middot; Admin Panel</p>
 </footer>
 <script>
 (function () {

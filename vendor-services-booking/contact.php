@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param('ssss', $name, $email, $subject, $message);
         if ($stmt->execute()) {
             $stmt->close();
-            $success = "Thanks for reaching out — we'll get back to you soon.";
+            $success = "Thanks for reaching out to GUGUGAGA — we'll get back to you soon.";
         } else {
             $error = 'Could not send your message. Please try again.';
             $stmt->close();
@@ -33,7 +33,7 @@ require 'partials/header.php';
 ?>
 <div class="page-header">
 <h1>Contact Us</h1>
-<p>Have a question about a vendor or a booking? Get in touch.</p>
+<p>Have a question about a vendor or a booking? Get in touch with GUGUGAGA.</p>
 </div>
 
 <section>
@@ -41,12 +41,12 @@ require 'partials/header.php';
 <div class="card">
 <div class="card-icon">&#128205;</div>
 <h3>Location</h3>
-<p>Student Centre Management Office<br>Ground Floor</p>
+<p>GUGUGAGA HQ<br>Kuala Lumpur, Malaysia</p>
 </div>
 <div class="card">
 <div class="card-icon">&#128222;</div>
 <h3>Contact</h3>
-<p>+60 3-4145 0450<br>vendors@tarumt.edu.my</p>
+<p>+60 3-1234 5678<br>support@gugugaga.com</p>
 </div>
 <div class="card">
 <div class="card-icon">&#128337;</div>

@@ -36,12 +36,12 @@ $testimonials = $conn->query('
     ORDER BY t.created_at DESC
 ')->fetch_all(MYSQLI_ASSOC);
 
-$pageTitle = 'Testimonials';
+$pageTitle = 'Testimonials - GUGUGAGA';
 require 'partials/header.php';
 ?>
 <div class="page-header">
 <h1>Testimonials</h1>
-<p>What students are saying about on-campus vendor services.</p>
+<p>What clients are saying about GUGUGAGA vendor services.</p>
 </div>
 
 <?php if (current_user_id()): ?>

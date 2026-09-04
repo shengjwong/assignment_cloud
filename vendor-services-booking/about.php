@@ -7,14 +7,12 @@ require 'partials/header.php';
 ?>
 <div class="page-header">
 <h1>About This Platform</h1>
-<p>What On-Campus Vendor Services is, and how it works.</p>
+<p>What Vendor Services is, and how it works.</p>
 </div>
 
 <section>
 <h2>Our Mission</h2>
-<p>On-Campus Vendor Services gives students one place to book a time slot with campus
-vendors — printing, laundry, tailoring, tech repair and more — instead of queuing on the
-off chance a vendor is free.</p>
+<p>Vendor Services provides users with one seamless platform to book time slots with local service vendors — including printing, laundry, tailoring, tech repair, and more — eliminating long waiting times and hassle.</p>
 </section>
 
 <section>
@@ -23,24 +21,23 @@ off chance a vendor is free.</p>
 <div class="card">
 <div class="card-icon">&#127978;</div>
 <h3>1. Browse Vendors</h3>
-<p>See every vendor on campus, grouped by category and location.</p>
+<p>Discover trusted service vendors, categorized by service type and location.</p>
 </div>
 <div class="card">
 <div class="card-icon">&#128197;</div>
 <h3>2. Book a Slot</h3>
-<p>Pick a date and time slot that fits your schedule.</p>
+<p>Pick a date and time slot that perfectly fits your schedule.</p>
 </div>
 <div class="card">
 <div class="card-icon">&#9989;</div>
 <h3>3. Manage Bookings</h3>
-<p>Edit or cancel your booking anytime from your homepage.</p>
+<p>Edit or cancel your appointments anytime directly from your dashboard.</p>
 </div>
 </div>
 </section>
 
 <section>
 <h2>Who Runs This</h2>
-<p>This platform is a sample project built for the AMIT3253 Cloud Computing for Business
-capstone assignment, demonstrating a simple booking/ticketing system deployed on AWS.</p>
+<p>This platform is designed and managed to connect clients with quality service providers efficiently.</p>
 </section>
 <?php require 'partials/footer.php'; ?>

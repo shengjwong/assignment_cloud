@@ -31,12 +31,12 @@ if ($uid = current_user_id()) {
     $stmt->close();
 }
 
-$pageTitle = 'On-Campus Vendor Services';
+$pageTitle = 'GUGUGAGA - Professional Vendor Booking Platform';
 require 'partials/header.php';
 ?>
 <section class="hero">
-<h1>On-Campus Vendor Services</h1>
-<p>Book a time slot with printing, laundry, tailoring and repair vendors on campus.</p>
+<h1>GUGUGAGA Vendor Services</h1>
+<p>Easily book appointments with top-rated local printing, laundry, tailoring, and tech repair vendors.</p>
 </section>
 
 <section>

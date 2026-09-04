@@ -8,18 +8,18 @@ $vendors = $conn->query('SELECT * FROM vendors ORDER BY vendor_name')->fetch_all
 $totalVendors = count($vendors);
 $totalCategories = count(array_unique(array_column($vendors, 'category')));
 
-$pageTitle = 'All Vendors';
+$pageTitle = 'All Vendors - GUGUGAGA';
 require 'partials/header.php';
 ?>
 <div class="page-header">
 <h1>All Vendors</h1>
-<p>Every on-campus vendor offering bookable service slots.</p>
+<p>Discover top-rated service vendors on GUGUGAGA offering bookable slots.</p>
 </div>
 
 <section>
 <div class="card-grid">
-<div class="card"><h3><?= (int)$totalVendors ?></h3><p>Vendors on campus</p></div>
-<div class="card"><h3><?= (int)$totalCategories ?></h3><p>Service categories</p></div>
+<div class="card"><h3><?= (int)$totalVendors ?></h3><p>Active Vendors</p></div>
+<div class="card"><h3><?= (int)$totalCategories ?></h3><p>Service Categories</p></div>
 </div>
 </section>
 
