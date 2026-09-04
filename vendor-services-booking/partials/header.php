@@ -19,33 +19,33 @@ function nav_active($page, $current) {
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="<?= htmlspecialchars($pageDescription ?? 'Book a service slot with GUGUGAGA vendors - printing, laundry, tailoring, tech repair and more.') ?>">
-<title><?= htmlspecialchars($pageTitle ?? 'GUGUGAGA - Vendor Services') ?></title>
-<link rel="icon" type="image/png" href="assets/gugugaga.png">
-<link rel="stylesheet" href="style.css?v=<?= @filemtime(__DIR__ . '/../style.css') ?>">
+<title><?= htmlspecialchars($pageTitle ?? 'Admin - GUGUGAGA Services') ?></title>
+<link rel="icon" type="image/png" href="../assets/gugugaga.png">
+<link rel="stylesheet" href="../style.css?v=<?= @filemtime(__DIR__ . '/../style.css') ?>">
 </head>
 <body>
 <nav class="navbar">
-<a class="brand" href="index.php"><img src="assets/booking.png" alt="GUGUGAGA Logo" class="brand-logo">GUGUGAGA Services</a>
+<a class="brand" href="index.php"><img src="../assets/gugugaga.png" alt="GUGUGAGA Logo" class="brand-logo">Admin - GUGUGAGA Services</a>
 <div class="nav-links">
-<a href="index.php" class="<?= trim(nav_active('index.php', $currentPage)) ?>">Home</a>
 <a href="vendors.php" class="<?= trim(nav_active('vendors.php', $currentPage)) ?>">Vendors</a>
 <a href="schedule.php" class="<?= trim(nav_active('schedule.php', $currentPage)) ?>">Schedule</a>
+<a href="bookings.php" class="<?= trim(nav_active('bookings.php', $currentPage)) ?>">Bookings</a>
 <a href="testimonials.php" class="<?= trim(nav_active('testimonials.php', $currentPage)) ?>">Testimonials</a>
-<a href="about.php" class="<?= trim(nav_active('about.php', $currentPage)) ?>">About</a>
-<a href="contact.php" class="<?= trim(nav_active('contact.php', $currentPage)) ?>">Contact</a>
+<a href="messages.php" class="<?= trim(nav_active('messages.php', $currentPage)) ?>">Messages</a>
+<a href="users.php" class="<?= trim(nav_active('users.php', $currentPage)) ?>">Users</a>
 <?php if ($loggedIn): ?>
 <div class="user-menu">
 <button type="button" class="nav-user user-menu-trigger" aria-haspopup="true" aria-expanded="false">
 <span class="user-avatar"><?= htmlspecialchars(mb_strtoupper(mb_substr(current_user_name(), 0, 1))) ?></span> Hi, <?= htmlspecialchars(current_user_name()) ?>
 </button>
 <div class="user-menu-dropdown">
-<a href="account.php">My Account</a>
-<a href="logout.php">Logout</a>
+<a href="../account.php">My Account</a>
+<a href="../logout.php">Logout</a>
 </div>
 </div>
 <?php else: ?>
-<a href="login.php">Login</a>
-<a href="register.php">Register</a>
+<a href="../login.php">Login</a>
+<a href="../register.php">Register</a>
 <?php endif; ?>
 <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">&#9728;</button>
 </div>
