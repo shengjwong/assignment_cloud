@@ -52,7 +52,7 @@ function nav_active($page, $current) {
 
 <a class="brand" href="index.php">
     <img
-        src="assets/gugugaga.png"
+        src="assets/booking.png"
         alt="GUGUGAGA Logo"
         class="brand-logo"
     >
