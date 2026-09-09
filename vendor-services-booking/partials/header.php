@@ -86,6 +86,16 @@ function nav_active($page, $current) {
     Testimonials
 </a>
 
+<a href="about.php"
+   class="<?= trim(nav_active('about.php', $currentPage)) ?>">
+    About
+</a>
+
+<a href="contact.php"
+   class="<?= trim(nav_active('contact.php', $currentPage)) ?>">
+    Contact
+</a>
+
 <?php if ($loggedIn): ?>
 
 <?php if ($isAdmin): ?>
