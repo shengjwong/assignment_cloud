@@ -79,15 +79,15 @@ variable "health_check_path" {
 
 variable "asg_min_size" {
   type    = number
-  default = 1
+  default = 2
 }
 
 variable "asg_max_size" {
   type    = number
-  default = 1
+  default = 4
 }
 
 variable "asg_desired_capacity" {
   type    = number
-  default = 1
+  default = 2
 }
