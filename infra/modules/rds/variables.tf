@@ -41,7 +41,7 @@ variable "instance_class" {
 variable "allocated_storage" {
   description = "Allocated storage in GB."
   type        = number
-  default     = 20
+  default     = 50
 }
 
 variable "engine_version" {
