@@ -37,12 +37,12 @@ function nav_active($page, $current) {
 <link
     rel="icon"
     type="image/png"
-    href="assets/gugugaga.png"
+    href="/assets/gugugaga.png"
 >
 
 <link
     rel="stylesheet"
-    href="style.css?v=<?= @filemtime(__DIR__ . '/../style.css') ?>"
+    href="/style.css?v=<?= @filemtime(__DIR__ . '/../style.css') ?>"
 >
 </head>
 
@@ -50,9 +50,9 @@ function nav_active($page, $current) {
 
 <nav class="navbar">
 
-<a class="brand" href="index.php">
+<a class="brand" href="/index.php">
     <img
-        src="assets/booking.png"
+        src="/assets/booking.png"
         alt="GUGUGAGA Logo"
         class="brand-logo"
     >
@@ -61,37 +61,37 @@ function nav_active($page, $current) {
 
 <div class="nav-links">
 
-<a href="index.php"
+<a href="/index.php"
    class="<?= trim(nav_active('index.php', $currentPage)) ?>">
     Home
 </a>
 
-<a href="vendors.php"
+<a href="/vendors.php"
    class="<?= trim(nav_active('vendors.php', $currentPage)) ?>">
     Vendors
 </a>
 
-<a href="schedule.php"
+<a href="/schedule.php"
    class="<?= trim(nav_active('schedule.php', $currentPage)) ?>">
     Schedule
 </a>
 
-<a href="bookings.php"
+<a href="/bookings.php"
    class="<?= trim(nav_active('bookings.php', $currentPage)) ?>">
     Bookings
 </a>
 
-<a href="testimonials.php"
+<a href="/testimonials.php"
    class="<?= trim(nav_active('testimonials.php', $currentPage)) ?>">
     Testimonials
 </a>
 
-<a href="about.php"
+<a href="/about.php"
    class="<?= trim(nav_active('about.php', $currentPage)) ?>">
     About
 </a>
 
-<a href="contact.php"
+<a href="/contact.php"
    class="<?= trim(nav_active('contact.php', $currentPage)) ?>">
     Contact
 </a>
@@ -100,7 +100,7 @@ function nav_active($page, $current) {
 
 <?php if ($isAdmin): ?>
 
-<a href="admin/index.php">
+<a href="/admin/index.php">
     Admin
 </a>
 
@@ -127,11 +127,11 @@ function nav_active($page, $current) {
 
 <div class="user-menu-dropdown">
 
-<a href="account.php">
+<a href="/account.php">
     My Account
 </a>
 
-<a href="logout.php">
+<a href="/logout.php">
     Logout
 </a>
 
@@ -141,11 +141,11 @@ function nav_active($page, $current) {
 
 <?php else: ?>
 
-<a href="login.php">
+<a href="/login.php">
     Login
 </a>
 
-<a href="register.php">
+<a href="/register.php">
     Register
 </a>
 
@@ -162,5 +162,3 @@ function nav_active($page, $current) {
 
 </div>
 </nav>
-
-<main class="container">
