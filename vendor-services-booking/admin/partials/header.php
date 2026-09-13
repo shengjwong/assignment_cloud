@@ -13,12 +13,12 @@
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?= htmlspecialchars($pageTitle ?? 'Admin') ?></title>
-<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="icon" type="image/png" href="../assets/gugugaga.png">
 <link rel="stylesheet" href="../style.css?v=<?= @filemtime(__DIR__ . '/../../style.css') ?>">
 </head>
 <body>
 <nav class="navbar">
-<a class="brand" href="vendors.php"><img src="../assets/tarumt-logo.png" alt="TAR UMT" class="brand-logo">Admin &middot; Vendor Services</a>
+<a class="brand" href="vendors.php"><img src="../assets/booking.png" alt="TAR UMT" class="brand-logo">Admin &middot; Vendor Services</a>
 <div class="nav-links">
 <a href="vendors.php" class="<?= $currentPage === 'vendors.php' ? 'active' : '' ?>">Vendors</a>
 <a href="schedule.php" class="<?= $currentPage === 'schedule.php' ? 'active' : '' ?>">Schedule</a>
