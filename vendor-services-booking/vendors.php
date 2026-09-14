@@ -19,20 +19,24 @@ require 'partials/header.php';
         <p>Discover top-rated service vendors on GUGUGAGA offering bookable slots.</p>
     </div>
 
+    <!-- Vendor Statistics -->
     <section>
-        <div class="card-grid">
-            <div class="card">
+        <div class="vendor-stats">
+
+            <div class="card vendor-stat-card">
                 <h3><?= (int)$totalVendors ?></h3>
                 <p>Active Vendors</p>
             </div>
 
-            <div class="card">
+            <div class="card vendor-stat-card">
                 <h3><?= (int)$totalCategories ?></h3>
                 <p>Service Categories</p>
             </div>
+
         </div>
     </section>
 
+    <!-- Vendor List -->
     <?php foreach ($vendors as $v): ?>
 
         <section>
