@@ -1549,40 +1549,33 @@ body > .container {
     margin-right: auto;
 }
 
-/* Public page sections */
-body > main > section,
-body > main > .page-header,
-body > main > .card-grid,
-body > main > .filter-bar,
-body > main > .testimonial-list,
-body > main > .empty-state {
+/* Public page layout */
+.container {
     width: 100%;
+    max-width: 1040px;
     margin-left: auto;
     margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
 }
 
-/* Forms */
-body > main .form-card,
-body > main .auth-card {
+.container > .page-header {
+    width: 100%;
+    max-width: 1040px;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
 }
 
-/* Tables */
-body > main table {
+.container > section {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
 
 .vendor-card {
+    width: 100%;
     max-width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.contact-form-card {
-    max-width: 560px;
     margin-left: auto;
     margin-right: auto;
 }
