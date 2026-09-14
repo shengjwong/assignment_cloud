@@ -11,33 +11,82 @@ $totalCategories = count(array_unique(array_column($vendors, 'category')));
 $pageTitle = 'All Vendors - GUGUGAGA';
 require 'partials/header.php';
 ?>
-<div class="page-header">
-<h1>All Vendors</h1>
-<p>Discover top-rated service vendors on GUGUGAGA offering bookable slots.</p>
+
+<div class="container">
+
+    <div class="page-header">
+        <h1>All Vendors</h1>
+        <p>Discover top-rated service vendors on GUGUGAGA offering bookable slots.</p>
+    </div>
+
+    <section>
+        <div class="card-grid">
+            <div class="card">
+                <h3><?= (int)$totalVendors ?></h3>
+                <p>Active Vendors</p>
+            </div>
+
+            <div class="card">
+                <h3><?= (int)$totalCategories ?></h3>
+                <p>Service Categories</p>
+            </div>
+        </div>
+    </section>
+
+    <?php foreach ($vendors as $v): ?>
+
+        <section>
+            <div class="card vendor-card">
+
+                <img
+                    class="card-thumb"
+                    src="<?= htmlspecialchars(entity_image_url($v)) ?>"
+                    alt="<?= htmlspecialchars($v['vendor_name']) ?>"
+                    loading="lazy"
+                >
+
+                <span class="badge badge-accent">
+                    <?= htmlspecialchars($v['category']) ?>
+                </span>
+
+                <h3><?= htmlspecialchars($v['vendor_name']) ?></h3>
+
+                <p>
+                    &#128205;
+                    <?= htmlspecialchars($v['location']) ?>
+                </p>
+
+                <?php if (!empty($v['description'])): ?>
+                    <p><?= htmlspecialchars($v['description']) ?></p>
+                <?php endif; ?>
+
+                <p class="price-tag">
+                    RM<?= number_format($v['price_per_unit'], 2) ?>
+                    / <?= htmlspecialchars($v['unit_label']) ?>
+                </p>
+
+                <?php if (current_user_id()): ?>
+
+                    <a
+                        class="btn"
+                        href="create.php?vendor_id=<?= (int)$v['id'] ?>"
+                    >
+                        Book Slot
+                    </a>
+
+                <?php else: ?>
+
+                    <a class="btn" href="login.php">
+                        Login to Book
+                    </a>
+
+                <?php endif; ?>
+
+            </div>
+        </section>
+
+    <?php endforeach; ?>
+
 </div>
 
-<section>
-<div class="card-grid">
-<div class="card"><h3><?= (int)$totalVendors ?></h3><p>Active Vendors</p></div>
-<div class="card"><h3><?= (int)$totalCategories ?></h3><p>Service Categories</p></div>
-</div>
-</section>
-
-<?php foreach ($vendors as $v): ?>
-<section>
-<div class="card" style="max-width:720px;">
-<img class="card-thumb" src="<?= htmlspecialchars(entity_image_url($v)) ?>" alt="<?= htmlspecialchars($v['vendor_name']) ?>" loading="lazy">
-<span class="badge badge-accent"><?= htmlspecialchars($v['category']) ?></span>
-<h3><?= htmlspecialchars($v['vendor_name']) ?></h3>
-<p>&#128205; <?= htmlspecialchars($v['location']) ?></p>
-<?php if (!empty($v['description'])): ?><p><?= htmlspecialchars($v['description']) ?></p><?php endif; ?>
-<p class="price-tag">RM<?= number_format($v['price_per_unit'], 2) ?> / <?= htmlspecialchars($v['unit_label']) ?></p>
-<?php if (current_user_id()): ?>
-<a class="btn" href="create.php?vendor_id=<?= (int)$v['id'] ?>">Book Slot</a>
-<?php else: ?>
-<a class="btn" href="login.php">Login to Book</a>
-<?php endif; ?>
-</div>
-</section>
-<?php endforeach; ?>
 <?php require 'partials/footer.php'; ?>

@@ -16,8 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = 'Please enter a valid email address.';
     } else {
-        $stmt = $conn->prepare('INSERT INTO contact_messages (name, email, subject, message) VALUES (?, ?, ?, ?)');
+        $stmt = $conn->prepare(
+            'INSERT INTO contact_messages (name, email, subject, message)
+             VALUES (?, ?, ?, ?)'
+        );
+
         $stmt->bind_param('ssss', $name, $email, $subject, $message);
+
         if ($stmt->execute()) {
             $stmt->close();
             $success = "Thanks for reaching out to GUGUGAGA — we'll get back to you soon.";
@@ -31,45 +36,134 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $pageTitle = 'Contact Us';
 require 'partials/header.php';
 ?>
-<div class="page-header">
-<h1>Contact Us</h1>
-<p>Have a question about a vendor or a booking? Get in touch with GUGUGAGA.</p>
+
+<div class="container">
+
+    <div class="page-header">
+        <h1>Contact Us</h1>
+        <p>
+            Have a question about a vendor or a booking?
+            Get in touch with GUGUGAGA.
+        </p>
+    </div>
+
+    <section>
+
+        <div class="card-grid">
+
+            <div class="card">
+                <div class="card-icon">&#128205;</div>
+
+                <h3>Location</h3>
+
+                <p>
+                    GUGUGAGA HQ<br>
+                    Kuala Lumpur, Malaysia
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">&#128222;</div>
+
+                <h3>Contact</h3>
+
+                <p>
+                    +60 3-1234 5678<br>
+                    support@gugugaga.com
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">&#128337;</div>
+
+                <h3>Office Hours</h3>
+
+                <p>
+                    Mon - Fri: 9:00 AM - 6:00 PM
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section>
+
+        <h2>Send Us a Message</h2>
+
+        <div class="form-card contact-form-card">
+
+            <?php if ($success): ?>
+
+                <p class="alert alert-success">
+                    <?= htmlspecialchars($success) ?>
+                </p>
+
+            <?php endif; ?>
+
+            <?php if ($error): ?>
+
+                <p class="alert alert-error">
+                    <?= htmlspecialchars($error) ?>
+                </p>
+
+            <?php endif; ?>
+
+            <?php if (!$success): ?>
+
+                <form method="post">
+
+                    <label>
+                        Your Name
+                        <input
+                            type="text"
+                            name="name"
+                            value="<?= htmlspecialchars($_POST['name'] ?? '') ?>"
+                            required
+                        >
+                    </label>
+
+                    <label>
+                        Email
+                        <input
+                            type="email"
+                            name="email"
+                            value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
+                            required
+                        >
+                    </label>
+
+                    <label>
+                        Subject
+                        <input
+                            type="text"
+                            name="subject"
+                            value="<?= htmlspecialchars($_POST['subject'] ?? '') ?>"
+                            required
+                        >
+                    </label>
+
+                    <label>
+                        Message
+                        <textarea
+                            name="message"
+                            rows="5"
+                            required
+                        ><?= htmlspecialchars($_POST['message'] ?? '') ?></textarea>
+                    </label>
+
+                    <button type="submit">
+                        Send Message
+                    </button>
+
+                </form>
+
+            <?php endif; ?>
+
+        </div>
+
+    </section>
+
 </div>
 
-<section>
-<div class="card-grid">
-<div class="card">
-<div class="card-icon">&#128205;</div>
-<h3>Location</h3>
-<p>GUGUGAGA HQ<br>Kuala Lumpur, Malaysia</p>
-</div>
-<div class="card">
-<div class="card-icon">&#128222;</div>
-<h3>Contact</h3>
-<p>+60 3-1234 5678<br>support@gugugaga.com</p>
-</div>
-<div class="card">
-<div class="card-icon">&#128337;</div>
-<h3>Office Hours</h3>
-<p>Mon - Fri: 9:00 AM - 6:00 PM</p>
-</div>
-</div>
-</section>
-
-<section>
-<h2>Send Us a Message</h2>
-<div class="form-card" style="max-width:560px;">
-<?php if ($success): ?><p class="alert alert-success"><?= htmlspecialchars($success) ?></p><?php endif; ?>
-<?php if ($error): ?><p class="alert alert-error"><?= htmlspecialchars($error) ?></p><?php endif; ?>
-<?php if (!$success): ?>
-<form method="post">
-<label>Your Name <input type="text" name="name" value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" required></label>
-<label>Email <input type="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required></label>
-<label>Subject <input type="text" name="subject" value="<?= htmlspecialchars($_POST['subject'] ?? '') ?>" required></label>
-<label>Message <textarea name="message" rows="5" required><?= htmlspecialchars($_POST['message'] ?? '') ?></textarea></label>
-<button type="submit">Send Message</button>
-</form>
-<?php endif; ?>
-</div>
-</section>
 <?php require 'partials/footer.php'; ?>
