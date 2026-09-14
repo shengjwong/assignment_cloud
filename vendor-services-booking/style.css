@@ -1525,4 +1525,52 @@ a:hover {
   button {
     padding: 10px 18px;
   }
+  
+}
+/* =========================================================
+   PUBLIC CONTENT CENTERING
+   ========================================================= */
+
+/* Main public content wrapper */
+body > main {
+    width: 100%;
+    max-width: 1040px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+/* Existing public container */
+body > .container {
+    width: 100%;
+    max-width: 1040px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Public page sections */
+body > main > section,
+body > main > .page-header,
+body > main > .card-grid,
+body > main > .filter-bar,
+body > main > .testimonial-list,
+body > main > .empty-state {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Forms */
+body > main .form-card,
+body > main .auth-card {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Tables */
+body > main table {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
